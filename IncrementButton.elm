@@ -22,6 +22,7 @@ init =
 
 type Msg
     = Increment Int
+    | Decrement Int
 
 
 
@@ -31,7 +32,10 @@ type Msg
 view : Model -> Html Msg
 view model =
     div []
-        [ button [ onClick (Increment 2) ] [ text "+" ]
+        [ button [ onClick (Increment 2) ] [ text "+ 2" ]
+        ,  button [ onClick (Increment 1) ] [ text "+ 1" ]
+        ,  button [ onClick (Decrement 2) ] [ text "- 2" ]
+        ,  button [ onClick (Decrement 1) ] [ text "- 1" ]
         , text (toString model)
         ]
 
@@ -45,6 +49,8 @@ update msg model =
     case msg of
         Increment howMuch ->
             ( model + howMuch, Cmd.none )
+        Decrement howMuch ->
+            ( model - howMuch, Cmd.none )
 
 
 

@@ -1,18 +1,26 @@
-module App exposing (..)
+module Main exposing (..)
 
-import Html exposing (Html, div, text, program)
+import Html exposing (Html, program)
+import Widget
 
 
 -- MODEL
 
 
-type alias Model =
-    String
+type alias AppModel =
+    { widgetModel : Widget.Model
+    }
 
 
-init : ( Model, Cmd Msg )
+initialModel : AppModel
+initialModel =
+    { widgetModel = Widget.initialModel
+    }
+
+
+init : ( AppModel, Cmd Msg )
 init =
-    ( "Hello", Cmd.none )
+    ( initialModel, Cmd.none )
 
 
 
@@ -20,44 +28,49 @@ init =
 
 
 type Msg
-    = NoOp
+    = WidgetMsg Widget.Msg
 
 
 
 -- VIEW
 
 
-view : Model -> Html Msg
+view : AppModel -> Html Msg
 view model =
-    div []
-        [ text model ]
+    Html.div []
+        [ Html.map WidgetMsg (Widget.view model.widgetModel)
+        ]
 
 
 
 -- UPDATE
 
 
-update : Msg -> Model -> ( Model, Cmd Msg )
-update msg model =
-    case msg of
-        NoOp ->
-            ( model, Cmd.none )
+update : Msg -> AppModel -> ( AppModel, Cmd Msg )
+update message model =
+    case message of
+        WidgetMsg subMsg ->
+            let
+                ( updatedWidgetModel, widgetCmd ) =
+                    Widget.update subMsg model.widgetModel
+            in
+                ( { model | widgetModel = updatedWidgetModel }, Cmd.map WidgetMsg widgetCmd )
 
 
 
 -- SUBSCRIPTIONS
 
 
-subscriptions : Model -> Sub Msg
+subscriptions : AppModel -> Sub Msg
 subscriptions model =
     Sub.none
 
 
 
--- MAIN
+-- APP
 
 
-main : Program Never Model Msg
+main : Program Never AppModel Msg
 main =
     program
         { init = init

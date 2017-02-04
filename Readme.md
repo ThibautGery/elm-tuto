@@ -1,6 +1,6 @@
 # Role Game dashboard
 
-This is a frontend application to track level of a role game player.
+This is a front-end application to track level of a role game player.
 it is a learning project to learn the language Elm following [this tutorial](https://www.elm-tutorial.org)
 
 ## Requirements
@@ -11,18 +11,19 @@ it is a learning project to learn the language Elm following [this tutorial](htt
 
 ### Install the dependencies
 ```bash
-npm install #install nodejs dependencies
+npm install -g foreman # to install the process manager
+npm install #install NodeJs dependencies
 elm-package install #install elm dependencies
 ```
 ### Run the app
 
 ```bash
-elm reactor # run the frontend
-npm start # run the backend
+npm dev # run the front-end
+npm api # run the backend
 ```
 
 ### Build the application
 
 ```bash
-elm make
+npm build
 ```

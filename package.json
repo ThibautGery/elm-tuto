@@ -1,0 +1,26 @@
+{
+  "name": "role-playing-dashboard",
+  "version": "0.1.0",
+  "description": "track level of a role game player",
+  "main": "api.js",
+  "scripts": {
+    "start": "node api.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThibautGery/elm-tuto.git"
+  },
+  "keywords": [
+    "elm"
+  ],
+  "author": "Thibaut Gery",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ThibautGery/elm-tuto/issues"
+  },
+  "homepage": "https://github.com/ThibautGery/elm-tuto#readme",
+  "dependencies": {
+    "json-server": "^0.9.4"
+  }
+}

@@ -1,10 +1,11 @@
 module Players.Edit exposing (..)
 
 import Html exposing (..)
-import Html.Attributes exposing (class, value, href)
+import Html.Attributes exposing (class, value, href, type_ )
 import Players.Messages exposing (..)
 import Players.Models exposing (..)
-import Html.Events exposing (onClick)
+import Html.Events exposing (onClick, onInput)
+
 
 
 
@@ -40,6 +41,12 @@ formLevel player =
             [ span [ class "h2 bold" ] [ text (toString player.level) ]
             , btnLevelDecrease player
             , btnLevelIncrease player
+            ]
+        , div [ class "col col-5" ] [ text "Name" ]
+        , div [ class "col col-7" ]
+            [ span [ class "h2 bold" ]
+            [
+              input [ type_ "text", value player.name, onInput (ChangeName player.id)  ] []  ]
             ]
         ]
 

@@ -22,6 +22,8 @@ update message players =
       ChangeLevel id howMuch ->
           ( players, changeLevelCommands id howMuch players |> Cmd.batch )
 
+      ChangeName playerId playerName ->
+          ( players, changeNameCommands playerId playerName players |> Cmd.batch )
 
       OnSave (Ok updatedPlayer) ->
           ( updatePlayer updatedPlayer players, Cmd.none )
@@ -45,6 +47,18 @@ changeLevelCommands playerId howMuch players =
         cmdForPlayer existingPlayer =
             if existingPlayer.id == playerId then
                 save { existingPlayer | level = existingPlayer.level + howMuch }
+            else
+                Cmd.none
+    in
+        List.map cmdForPlayer players
+
+
+changeNameCommands : PlayerId -> String -> List Player -> List (Cmd Msg)
+changeNameCommands playerId newName players =
+    let
+        cmdForPlayer existingPlayer =
+            if existingPlayer.id == playerId then
+                save { existingPlayer | name = newName }
             else
                 Cmd.none
     in

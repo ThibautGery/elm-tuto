@@ -12,3 +12,4 @@ type Msg
       | DeletePlayer Player
       | OnDelete (Result Http.Error PlayerId)
       | OnSave (Result Http.Error Player)
+      | ChangeName PlayerId String

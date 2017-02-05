@@ -46,6 +46,8 @@ playerRow player =
         , td [] [ text (toString player.level) ]
         , td []
             [editBtn player]
+        , td []
+            [deleteBtn player]
         ]
 
 editBtn : Player -> Html Msg
@@ -55,3 +57,12 @@ editBtn player =
         , onClick (ShowPlayer player.id)
         ]
         [ i [ class "fa fa-pencil mr1" ] [], text "Edit" ]
+
+
+deleteBtn : Player -> Html Msg
+deleteBtn player =
+    button
+        [ class "btn regular"
+        , onClick (DeletePlayer player)
+        ]
+        [ i [ class "fa fa-trash mr1" ] [], text "Delete" ]

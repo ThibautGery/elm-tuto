@@ -9,4 +9,6 @@ type Msg
       | ShowPlayers
       | ShowPlayer PlayerId
       | ChangeLevel PlayerId Int
+      | DeletePlayer Player
+      | OnDelete (Result Http.Error PlayerId)
       | OnSave (Result Http.Error Player)

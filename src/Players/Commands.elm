@@ -65,3 +65,27 @@ memberEncoded player =
     in
         list
             |> Encode.object
+
+
+deleteUrl : PlayerId -> String
+deleteUrl playerId =
+    "http://localhost:4000/players/" ++ playerId
+
+
+deleteRequest : Player -> Http.Request PlayerId
+deleteRequest player =
+    Http.request
+        { body = memberEncoded player |> Http.jsonBody
+        , expect = Http.expectStringResponse (\_ -> Ok player.id)
+        , headers = []
+        , method = "DELETE"
+        , timeout = Nothing
+        , url = deleteUrl player.id
+        , withCredentials = False
+        }
+
+
+delete : Player -> Cmd Msg
+delete player =
+    deleteRequest player
+        |> Http.send OnDelete

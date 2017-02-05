@@ -1,6 +1,6 @@
 module Players.Update exposing (..)
 import Players.Models exposing (Player, PlayerId)
-import Players.Commands exposing (save)
+import Players.Commands exposing (save, delete)
 import Players.Messages exposing (Msg(..))
 import Navigation
 
@@ -22,10 +22,20 @@ update message players =
       ChangeLevel id howMuch ->
           ( players, changeLevelCommands id howMuch players |> Cmd.batch )
 
+
       OnSave (Ok updatedPlayer) ->
           ( updatePlayer updatedPlayer players, Cmd.none )
 
       OnSave (Err error) ->
+          ( players, Cmd.none )
+
+      DeletePlayer player ->
+          ( players, delete player )
+
+      OnDelete (Ok playerId) ->
+          ( deletePlayer playerId players, Cmd.none )
+
+      OnDelete (Err error) ->
           ( players, Cmd.none )
 
 
@@ -51,3 +61,8 @@ updatePlayer updatedPlayer players =
                 existingPlayer
     in
         List.map select players
+
+
+deletePlayer : PlayerId -> List Player -> List Player
+deletePlayer playerId players =
+        List.filter (\player -> player.id /= playerId ) players

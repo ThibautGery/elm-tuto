@@ -18,8 +18,8 @@ elm-package install #install elm dependencies
 ### Run the app
 
 ```bash
-npm dev # run the front-end
-npm api # run the backend
+npm run dev # run the front-end
+npm run api # run the backend
 ```
 
 ### Build the application

@@ -35,6 +35,9 @@ list players =
                 ]
             , tbody [] (List.map playerRow players)
             ]
+          ,div [] [
+            createBtn
+          ]
         ]
 
 
@@ -66,3 +69,11 @@ deleteBtn player =
         , onClick (DeletePlayer player)
         ]
         [ i [ class "fa fa-trash mr1" ] [], text "Delete" ]
+
+createBtn : Html Msg
+createBtn =
+    button
+        [ class "btn regular"
+        , onClick GeneratePlayer
+        ]
+        [ i [ class "fa fa-plus-square-o mr1" ] [], text "Create" ]

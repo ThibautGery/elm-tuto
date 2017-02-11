@@ -13,3 +13,5 @@ type Msg
       | OnDelete (Result Http.Error PlayerId)
       | OnSave (Result Http.Error Player)
       | ChangeName PlayerId String
+      | GeneratePlayer
+      | PlayerGenerated PlayerId

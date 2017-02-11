@@ -3,6 +3,7 @@ import Players.Models exposing (Player, PlayerId)
 import Players.Commands exposing (save, delete)
 import Players.Messages exposing (Msg(..))
 import Navigation
+import Random
 
 update : Msg -> List Player -> ( List Player, Cmd Msg )
 update message players =
@@ -15,6 +16,12 @@ update message players =
 
       ShowPlayers ->
           ( players, Navigation.newUrl "#players" )
+
+      GeneratePlayer ->
+          ( players, Random.generate PlayerGenerated (Random.map (\b -> toString b)(Random.int 0 Random.maxInt)))
+
+      PlayerGenerated id ->
+          ( createPlayer players id, Navigation.newUrl ("#players/" ++ id))
 
       ShowPlayer id ->
           ( players, Navigation.newUrl ("#players/" ++ id) )
@@ -39,7 +46,6 @@ update message players =
 
       OnDelete (Err error) ->
           ( players, Cmd.none )
-
 
 changeLevelCommands : PlayerId -> Int -> List Player -> List (Cmd Msg)
 changeLevelCommands playerId howMuch players =
@@ -80,3 +86,14 @@ updatePlayer updatedPlayer players =
 deletePlayer : PlayerId -> List Player -> List Player
 deletePlayer playerId players =
         List.filter (\player -> player.id /= playerId ) players
+
+
+createPlayer: List Player -> PlayerId -> List Player
+createPlayer players id =
+  let
+    newPlayer =
+      { id = id
+      , level = 1
+      , name = ""
+      }
+  in newPlayer :: players

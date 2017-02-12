@@ -4,16 +4,5 @@ dependencies:
     - tests/elm-stuff
   pre:
     - npm install -g elm
-    - |
-        if [ ! -d sysconfcpus/bin ];
-        then
-          git clone https://github.com/obmarg/libsysconfcpus.git;
-          cd libsysconfcpus;
-          ./configure --prefix=$HOME/sysconfcpus;
-          make && make install;
-          cd ..;
-        fi
     - npm install -g elm-test
     - npm install -g webpack
-    - echo "#\!/bin/bash\\n\\necho \"Running elm-make with sysconfcpus -n 2\"\\n\\n$HOME/sysconfcpus/bin/sysconfcpus -n 2 elm-make-old \"\$@\"" > $(npm config get prefix)/bin/elm-make
-    - chmod +x $(npm config get prefix)/bin/elm-make

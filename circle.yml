@@ -1,4 +1,7 @@
 dependencies:
+  cache_directories:
+    - elm-stuff
+    - tests/elm-stuff
   pre:
     - npm install -g elm
     - |

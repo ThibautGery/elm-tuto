@@ -3,8 +3,9 @@
 This is a front-end application to track level of a role game player.
 it is a learning project to learn the language Elm following [this tutorial](https://www.elm-tutorial.org)
 
+[![CircleCI](https://circleci.com/gh/ThibautGery/elm-tuto.svg?style=svg)](https://circleci.com/gh/ThibautGery/elm-tuto)
+
 ## Requirements
- * [Elm language](https://guide.elm-lang.org/install.html)
  * [nodeJS](https://nodejs.org/en/)
 
 ## Commands
@@ -12,8 +13,10 @@ it is a learning project to learn the language Elm following [this tutorial](htt
 ### Install the dependencies
 ```bash
 npm install -g foreman # to install the process manager
+npm install -g elm
+npm install -g elm-test
+npm install -g webpack
 npm install #install NodeJs dependencies
-elm-package install #install elm dependencies
 ```
 ### Run the app
 
@@ -26,4 +29,10 @@ npm run api # run the backend
 
 ```bash
 npm build
+```
+
+### Run the tests
+
+```bash
+elm tests
 ```

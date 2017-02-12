@@ -8,7 +8,8 @@
     "build": "webpack",
     "watch": "webpack --watch",
     "dev": "webpack-dev-server --port 3000",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "webpack",
+    "postinstall": "elm-package install"
   },
   "repository": {
     "type": "git",

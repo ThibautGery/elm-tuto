@@ -1,0 +1,5 @@
+dependencies:
+  pre:
+    - npm install -g elm
+    - npm install -g elm-test
+    - npm install -g webpack

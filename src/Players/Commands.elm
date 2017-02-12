@@ -89,3 +89,27 @@ delete : Player -> Cmd Msg
 delete player =
     deleteRequest player
         |> Http.send OnDelete
+
+
+createUrl : PlayerId -> String
+createUrl playerId =
+    "http://localhost:4000/players"
+
+
+createRequest : Player -> Http.Request Player
+createRequest player =
+    Http.request
+        { body = memberEncoded player |> Http.jsonBody
+        , expect = Http.expectJson memberDecoder
+        , headers = []
+        , method = "POST"
+        , timeout = Nothing
+        , url = createUrl player.id
+        , withCredentials = False
+        }
+
+
+create : Player -> Cmd Msg
+create player =
+    createRequest player
+        |> Http.send OnCreate

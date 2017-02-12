@@ -1,6 +1,6 @@
 module Players.Update exposing (..)
 import Players.Models exposing (Player, PlayerId)
-import Players.Commands exposing (save, delete)
+import Players.Commands exposing (save, delete, create)
 import Players.Messages exposing (Msg(..))
 import Navigation
 import Random
@@ -18,10 +18,10 @@ update message players =
           ( players, Nothing, Navigation.newUrl "#players" )
 
       GeneratePlayer ->
-          ( players, Nothing, Random.generate PlayerGenerated (Random.map (\b -> toString b)(Random.int 0 Random.maxInt)))
+          ( players, Nothing, Random.generate PlayerIdGenerated (Random.map (\b -> toString b)(Random.int 0 Random.maxInt)))
 
-      PlayerGenerated id ->
-          ( createPlayer players id, Nothing,Navigation.newUrl ("#players/" ++ id))
+      PlayerIdGenerated playerId ->
+          ( players, Nothing, createPlayer playerId)
 
       ShowPlayer id ->
           ( players, Nothing, Navigation.newUrl ("#players/" ++ id) )
@@ -33,7 +33,13 @@ update message players =
           ( players, Nothing, changeNameCommands playerId playerName players |> Cmd.batch )
 
       OnSave (Ok updatedPlayer) ->
-          ( updatePlayer updatedPlayer players, Nothing, Cmd.none )
+          ( updatePlayer updatedPlayer players, Nothing, Cmd.none)
+
+      OnCreate (Ok newPlayer) ->
+          ( newPlayer :: players, Nothing, Navigation.newUrl ("#players/" ++ newPlayer.id))
+
+      OnCreate (Err error) ->
+          ( players, Just "Impossible to create Player", Cmd.none )
 
       OnSave (Err error) ->
           ( players, Just "Impossible to save Player", Cmd.none )
@@ -88,12 +94,12 @@ deletePlayer playerId players =
         List.filter (\player -> player.id /= playerId ) players
 
 
-createPlayer: List Player -> PlayerId -> List Player
-createPlayer players id =
+createPlayer: PlayerId -> Cmd Msg
+createPlayer id =
   let
     newPlayer =
       { id = id
       , level = 1
       , name = ""
       }
-  in newPlayer :: players
+  in create newPlayer

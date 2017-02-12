@@ -5,21 +5,22 @@ import Html.Attributes exposing (class, value, href, type_ )
 import Players.Messages exposing (..)
 import Players.Models exposing (..)
 import Html.Events exposing (onClick, onInput)
+import Players.Error as Error
 
 
 
-
-view : Player -> Html Msg
-view model =
+view : Player -> Maybe String -> Html Msg
+view players errorMsg =
     div []
-        [ nav model
-        , form model
+        [ nav
+        , Error.view errorMsg
+        , form players
         ]
 
 
-nav : Player -> Html Msg
-nav model =
-    div [ class "clearfix mb2 white bg-black p1" ]
+nav : Html Msg
+nav =
+    div [ class "clearfix white bg-black p1" ]
         [ listBtn ]
 
 

@@ -5,19 +5,21 @@ import Html.Attributes exposing (class)
 import Players.Messages exposing (..)
 import Players.Models exposing (Player)
 import Html.Events exposing (onClick)
+import Players.Error as Error
 
 
-view : List Player -> Html Msg
-view players =
+view : List Player -> Maybe String -> Html Msg
+view players errorMsg =
     div []
-        [ nav players
+        [ nav
+        , Error.view errorMsg
         , list players
         ]
 
 
-nav : List Player -> Html Msg
-nav players =
-    div [ class "clearfix mb2 white bg-black" ]
+nav : Html Msg
+nav =
+    div [ class "clearfix white bg-black" ]
         [ div [ class "left p2" ] [ text "Players" ] ]
 
 

@@ -5,6 +5,8 @@ it is a learning project to learn the language Elm following [this tutorial](htt
 
 [![CircleCI](https://circleci.com/gh/ThibautGery/elm-tuto.svg?style=svg)](https://circleci.com/gh/ThibautGery/elm-tuto)
 
+I just wrote about this experience on my personal blog post [My First impression with elm](http://www.thibautgery.com/2017/02/13/elm-first-impressions/)
+
 ## Requirements
  * [nodeJS](https://nodejs.org/en/)
 
